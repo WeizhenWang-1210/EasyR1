@@ -71,6 +71,7 @@ class vLLMRollout(BaseRollout):
             skip_tokenizer_init=False,
             trust_remote_code=config.trust_remote_code,
             load_format="dummy",
+            # hard set
             dtype=PrecisionType.to_str(PrecisionType.to_dtype(config.dtype)),
             seed=config.seed,
             max_model_len=config.max_model_len or config.prompt_length + config.response_length,
@@ -85,6 +86,8 @@ class vLLMRollout(BaseRollout):
             disable_mm_preprocessor_cache=True,
             enable_chunked_prefill=config.enable_chunked_prefill,
             enable_sleep_mode=True,
+    
+            #compilation_config=None  # explicitly disable compilation
         )
 
         # Offload vllm model to reduce peak memory usage
