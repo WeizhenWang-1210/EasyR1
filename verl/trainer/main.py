@@ -11,6 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import torch
+torch._dynamo.config.suppress_errors = True  # Prevent backend compilation failures
+
+import logging
+logging.basicConfig(level=logging.INFO)
+torch._logging.set_logs(dynamo=logging.DEBUG)
 
 import json
 
@@ -27,7 +33,7 @@ from .ray_trainer import RayPPOTrainer, ResourcePoolManager, Role
 
 
 # please make sure main_task is not scheduled on head
-@ray.remote(num_cpus=1)
+@ray.remote(num_cpus=32)
 class Runner:
     """A runner for RL training."""
 
