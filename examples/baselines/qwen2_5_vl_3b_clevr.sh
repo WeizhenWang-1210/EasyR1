@@ -2,7 +2,7 @@ set -x
 
 MODEL_PATH=Qwen/Qwen2.5-VL-3B-Instruct  # replace it with your local file path
 
-python3 -m verl.trainer.main \
+python -m verl.trainer.main \
     config=examples/config.yaml \
     data.train_files=BUAADreamer/clevr_count_70k@train \
     data.val_files=BUAADreamer/clevr_count_70k@test \
